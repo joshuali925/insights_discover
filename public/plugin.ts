@@ -5,7 +5,7 @@ import {
   InsightsDiscoverPluginStart,
   AppPluginStartDependencies,
 } from './types';
-import { PLUGIN_NAME } from '../common';
+import { PLUGIN_NAME, PLUGIN_ID } from '../common';
 
 export class InsightsDiscoverPlugin
   implements Plugin<InsightsDiscoverPluginSetup, InsightsDiscoverPluginStart> {
@@ -14,6 +14,7 @@ export class InsightsDiscoverPlugin
     core.application.register({
       id: 'insightsDiscover',
       title: PLUGIN_NAME,
+      icon: `plugins/${PLUGIN_ID}/assets/icon.svg`,
       async mount(params: AppMountParameters) {
         // Load application bundle
         const { renderApp } = await import('./application');
