@@ -40,6 +40,9 @@ import { NavigationPublicPluginStart } from '../../../../src/plugins/navigation/
 
 import { PLUGIN_ID, PLUGIN_NAME } from '../../common';
 
+import Discover from '../components/discover';
+import TopNavMenu from './top_nav_menu';
+
 interface InsightsDiscoverAppDeps {
   basename: string;
   notifications: CoreStart['notifications'];
@@ -54,20 +57,6 @@ export const InsightsDiscoverApp = ({
   navigation,
 }: InsightsDiscoverAppDeps) => {
   // Use React hooks to manage state.
-  const [timestamp, setTimestamp] = useState<string | undefined>();
-
-  const onClickHandler = () => {
-    // Use the core http service to make a response to the server API.
-    http.get('/api/insights_discover/example').then(res => {
-      setTimestamp(res.time);
-      // Use the core notifications service to display a success message.
-      notifications.toasts.addSuccess(
-        i18n.translate('insightsDiscover.dataUpdated', {
-          defaultMessage: 'Data updated',
-        })
-      );
-    });
-  };
 
   // Render the application DOM.
   // Note that `navigation.ui.TopNavMenu` is a stateful component exported on the `navigation` plugin's start contract.
@@ -75,58 +64,9 @@ export const InsightsDiscoverApp = ({
     <Router basename={basename}>
       <I18nProvider>
         <>
+          <TopNavMenu />
           <navigation.ui.TopNavMenu appName={PLUGIN_ID} showSearchBar={true} />
-          <EuiPage restrictWidth="1000px">
-            <EuiPageBody>
-              <EuiPageHeader>
-                <EuiTitle size="l">
-                  <h1>
-                    <FormattedMessage
-                      id="insightsDiscover.helloWorldText"
-                      defaultMessage="{name}"
-                      values={{ name: PLUGIN_NAME }}
-                    />
-                  </h1>
-                </EuiTitle>
-              </EuiPageHeader>
-              <EuiPageContent>
-                <EuiPageContentHeader>
-                  <EuiTitle>
-                    <h2>
-                      <FormattedMessage
-                        id="insightsDiscover.congratulationsTitle"
-                        defaultMessage="Congratulations, you have successfully created a new Kibana Plugin!"
-                      />
-                    </h2>
-                  </EuiTitle>
-                </EuiPageContentHeader>
-                <EuiPageContentBody>
-                  <EuiText>
-                    <p>
-                      <FormattedMessage
-                        id="insightsDiscover.content"
-                        defaultMessage="Look through the generated code and check out the plugin development documentation."
-                      />
-                    </p>
-                    <EuiHorizontalRule />
-                    <p>
-                      <FormattedMessage
-                        id="insightsDiscover.timestampText"
-                        defaultMessage="Last timestamp: {time}"
-                        values={{ time: timestamp ? timestamp : 'Unknown' }}
-                      />
-                    </p>
-                    <EuiButton type="primary" size="s" onClick={onClickHandler}>
-                      <FormattedMessage
-                        id="insightsDiscover.buttonText"
-                        defaultMessage="Get data"
-                      />
-                    </EuiButton>
-                  </EuiText>
-                </EuiPageContentBody>
-              </EuiPageContent>
-            </EuiPageBody>
-          </EuiPage>
+          <Discover />
         </>
       </I18nProvider>
     </Router>
