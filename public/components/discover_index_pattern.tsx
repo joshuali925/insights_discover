@@ -2,20 +2,19 @@
 // https://github.com/elastic/kibana/blob/0082ca7ad8a7af7dad79d6912e6de5ad6db3b075/src/legacy/core_plugins/kibana/public/discover/np_ready/components/sidebar/change_indexpattern.tsx
 import React, { useState } from 'react'
 import { EuiPopover, EuiPopoverTitle, EuiSelectable, EuiButtonEmpty } from '@elastic/eui';
-import { i18n } from '@kbn/i18n';
 
 export default function DiscoverIndexPattern() {
-  const [isPopoverOpen, setPopoverIsOpen] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const createTrigger = function () {
     return (
       <EuiButtonEmpty
-        className="eui-textTruncate"
+        className="dscIndexPattern__triggerButton"
         flush="left"
         color="text"
         iconSide="right"
         iconType="arrowDown"
-        title={"test_title"}
-        onClick={() => setPopoverIsOpen(!isPopoverOpen)}
+        // title={"test_title"}
+        onClick={() => setIsPopoverOpen(!isPopoverOpen)}
       >
         {"test_label"}
       </EuiButtonEmpty>
@@ -27,7 +26,7 @@ export default function DiscoverIndexPattern() {
       <EuiPopover
         button={createTrigger()}
         isOpen={isPopoverOpen}
-        closePopover={() => setPopoverIsOpen(false)}
+        closePopover={() => setIsPopoverOpen(false)}
         panelPaddingSize="s"
         ownFocus
       >
@@ -46,7 +45,7 @@ export default function DiscoverIndexPattern() {
               const choice = (choices.find(({ checked }) => checked) as unknown) as {
                 value: string;
               };
-              setPopoverIsOpen(false);
+              setIsPopoverOpen(false);
             }}
             searchProps={{
               compressed: true,

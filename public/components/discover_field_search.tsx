@@ -30,7 +30,7 @@ export default function DiscoverFieldSearch() {
       },
     ];
   };
-  
+
   const select = (
     id: string,
     selectOptions: Array<{ text: ReactNode } & OptionHTMLAttributes<HTMLOptionElement>>,
@@ -53,7 +53,7 @@ export default function DiscoverFieldSearch() {
       />
     );
   };
-  
+
   const handleValueChange = (name: string, filterValue: string | boolean) => {
     const previousValue = values[name];
     updateFilterCount(name, previousValue, filterValue);
@@ -103,20 +103,15 @@ export default function DiscoverFieldSearch() {
 
   return (
     <React.Fragment>
-      <EuiFlexGroup responsive={false} gutterSize={'s'}>
-        <EuiFlexItem>
-          <EuiFieldSearch
-            compressed
-            fullWidth
-            onChange={event => setValue(event.currentTarget.value)}
-            placeholder={'Search field names'}
-            value={value}
-          />
-        </EuiFlexItem>
-      </EuiFlexGroup>
+      <EuiFieldSearch
+        compressed
+        fullWidth
+        onChange={event => setValue(event.currentTarget.value)}
+        placeholder={'Search field names'}
+        value={value}
+      />
       <EuiOutsideClickDetector onOutsideClick={() => { }} isDisabled={!isPopoverOpen}>
         <EuiPopover
-          panelPaddingSize="none"
           anchorPosition="downLeft"
           display="block"
           isOpen={isPopoverOpen}
@@ -126,6 +121,7 @@ export default function DiscoverFieldSearch() {
           button={(
             <EuiFacetButton
               icon={<EuiIcon type="filter" />}
+              className="dscFieldSearch__toggleButton"
               isSelected={activeFiltersCount > 0}
               quantity={activeFiltersCount}
               onClick={() => { setPopoverOpen(!isPopoverOpen) }}
@@ -135,13 +131,13 @@ export default function DiscoverFieldSearch() {
           )}
         >
           <EuiPopoverTitle>Filter by type</EuiPopoverTitle>
-          <div className="dscFieldSearch__formWrapper">
+          <div className="dscFieldSearch__formWrapper" style={{ width: 265 }}>
             <EuiForm>
               <EuiFormRow fullWidth label={"Aggregatable"} display="columnCompressed">
-              {buttonGroup('aggregatable', 'Aggregatable')}
+                {buttonGroup('aggregatable', 'Aggregatable')}
               </EuiFormRow>
               <EuiFormRow fullWidth label={"Searchable"} display="columnCompressed">
-              {buttonGroup('searchable', 'Searchable')}
+                {buttonGroup('searchable', 'Searchable')}
               </EuiFormRow>
               <EuiFormRow fullWidth label={"Type"} display="columnCompressed">
                 {select('type', typeOptions, values.type)}

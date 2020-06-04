@@ -41,7 +41,6 @@ import { NavigationPublicPluginStart } from '../../../../src/plugins/navigation/
 import { PLUGIN_ID, PLUGIN_NAME } from '../../common';
 
 import Discover from '../components/discover';
-import TopNavMenu from './top_nav_menu';
 
 interface InsightsDiscoverAppDeps {
   basename: string;
@@ -63,11 +62,10 @@ export const InsightsDiscoverApp = ({
   return (
     <Router basename={basename}>
       <I18nProvider>
-        <>
-          <TopNavMenu />
-          <navigation.ui.TopNavMenu appName={PLUGIN_ID} showSearchBar={true} />
+        {/* <navigation.ui.TopNavMenu appName={PLUGIN_ID} showSearchBar={true} /> */}
+        <div style={{ margin: 5 }}>
           <Discover />
-        </>
+        </div>
       </I18nProvider>
     </Router>
   );
