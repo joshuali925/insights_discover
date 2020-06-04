@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { EuiText, EuiPopover, EuiButton, EuiButtonEmpty, EuiFlexGroup, EuiFlexItem, EuiPanel } from '@elastic/eui'
-import SideBar from './side_bar'
+import SideBar from './side_bar/side_bar'
 import Table from './table';
-import SearchBar from './search_bar';
+import SearchBar from './search_bar/search_bar';
 import TopNavMenu from './top_nav_menu';
 
 
