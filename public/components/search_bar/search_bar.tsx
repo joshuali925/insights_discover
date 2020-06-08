@@ -5,7 +5,7 @@ import renderLanguageSwitcher from './language_switcher';
 
 export default function SearchBar() {
   return (
-    <div style={{ paddingTop: 10, paddingBottom: 15, paddingLeft: 5 }}>
+    <div style={{ marginTop: 10, marginBottom: 5, marginLeft: 5 }}>
       <EuiFlexGroup
         gutterSize="s"
         justifyContent="flexEnd"
