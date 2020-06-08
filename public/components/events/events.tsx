@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { EuiFlexGroup, EuiFlexItem, EuiPanel } from '@elastic/eui'
+import { EuiFlexGroup, EuiFlexItem, EuiPanel, EuiText, EuiTitle, EuiButton, EuiSpacer, EuiHorizontalRule, EuiButtonEmpty, EuiCodeBlock, EuiCode } from '@elastic/eui'
 import SideBar from '../side_bar/side_bar'
 import Plt from './plt';
 import { sampleLogData, layout } from '../../data/data';
+import Insights from './insights';
+import Legends from './legends';
 
 export default function Events() {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
@@ -52,7 +54,35 @@ export default function Events() {
       </EuiFlexItem>
       <EuiFlexItem>
         <EuiPanel grow={false}>
-          <Plt data={sampleLogData.data} title={sampleLogData.title} layout={layout} />
+          <EuiFlexGroup gutterSize='s'>
+            <EuiFlexItem>
+              <EuiTitle size='s'>
+                <h2>Visualization</h2>
+              </EuiTitle>
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+              <EuiButton iconSide='right' iconType='arrowDown'>Actions</EuiButton>
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+              <EuiButton>Customize Fields</EuiButton>
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+              <EuiButton fill>Export to dashboard</EuiButton>
+            </EuiFlexItem>
+          </EuiFlexGroup>
+          <EuiHorizontalRule margin='s' />
+          <EuiCode>
+            Response time last 24 hours |
+          </EuiCode>
+          <EuiFlexGroup>
+            <EuiFlexItem grow={false}>
+              <Plt data={sampleLogData.data} title={sampleLogData.title} layout={layout} />
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+              <Legends />
+            </EuiFlexItem>
+          </EuiFlexGroup>
+          <Insights />
         </EuiPanel>
       </EuiFlexItem>
     </EuiFlexGroup>

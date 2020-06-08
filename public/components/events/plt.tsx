@@ -17,17 +17,17 @@ export default function Plt(props) {
           //   color: "rgb(201,208,216)"
           // },
           autosize: true,
-          title: {
-            text: props.title,
-            font: {
-              size: 13,
-            },
-          },
+          // title: {
+          //   text: props.title,
+          //   font: {
+          //     size: 13,
+          //   },
+          // },
           margin: {
             l: 40,
             r: 30,
             b: 30,
-            t: 40,
+            t: 40,  // 10
             pad: 4
           },
           height: props.height,

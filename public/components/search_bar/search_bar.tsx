@@ -19,6 +19,7 @@ export default function SearchBar() {
             spellCheck={false}
             type="text"
             role="textbox"
+            onChange={() => {}}
             prepend={renderSavedQueries()}
             append={renderLanguageSwitcher()}
           />
