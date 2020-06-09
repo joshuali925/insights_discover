@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { EuiButtonEmpty, EuiPopover, EuiPopoverTitle, EuiForm, EuiFormRow, EuiSwitch, EuiSelect } from '@elastic/eui';
+import { EuiButtonEmpty, EuiPopover, EuiPopoverTitle, EuiForm, EuiFormRow, EuiSwitch, EuiSelect, EuiRadioGroup } from '@elastic/eui';
 
 export default function LanguageSwitcher(props) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -25,19 +25,22 @@ export default function LanguageSwitcher(props) {
         Syntax options
     </EuiPopoverTitle>
       <div style={{ width: '350px' }}>
-        <EuiSelect
+        <EuiRadioGroup
           options={[
             {
-              value: 'SQL',
-              text: 'SQL',
+              id: 'SQL',
+              label: 'SQL',
             },
             {
-              value: 'PPL',
-              text: 'PPL',
+              id: 'PPL',
+              label: 'PPL',
             }
           ]}
-          value={props.language}
-          onChange={(e) => props.setLanguage(e.target.value)}
+          idSelected={props.language}
+          onChange={(id) => props.setLanguage(id)}
+          legend={{
+            children: 'Select query language',
+          }}
         />
       </div>
     </EuiPopover>

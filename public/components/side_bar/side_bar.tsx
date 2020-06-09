@@ -21,7 +21,7 @@ export default function SideBar(props) {
         content={name}
         delay="long"
       >
-        <EuiText size="xs">
+        <EuiText size="xs" style={{float:'left'}}>
           {name}
         </EuiText>
       </EuiToolTip>
@@ -36,8 +36,8 @@ export default function SideBar(props) {
           <h3>Selected fields</h3>
         </EuiTitle>
         {props.selectedFields.map((field, idx) => (
-          <span key={`field-${idx}`} style={{ paddingLeft: 6 }} className='dscSidebarItem'>
-            <span>
+          <span key={`field-${idx}`} style={{ paddingLeft: 6, display: 'flex' }} className='dscSidebarItem'>
+            <span style={{marginTop: 2}}>
               {fieldIcon(field.icon)}
             </span>
             {/* TODO: fix vertical align for field name */}

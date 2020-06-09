@@ -48,7 +48,7 @@ export default function Events(props) {
             {JSON.stringify(props.response, null, 2)}
           </pre>
         </div>
-          ) : (<EuiText>Enter a query in the search bar then press enter.</EuiText>)}
+          ) : (<EuiText>Type a query in the search bar then press enter.</EuiText>)}
         </EuiPanel>
       </EuiFlexItem>
     </EuiFlexGroup>
