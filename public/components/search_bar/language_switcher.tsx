@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { EuiButtonEmpty, EuiPopover, EuiPopoverTitle, EuiForm, EuiFormRow, EuiSwitch } from '@elastic/eui';
+import { EuiButtonEmpty, EuiPopover, EuiPopoverTitle, EuiForm, EuiFormRow, EuiSwitch, EuiSelect } from '@elastic/eui';
 
-export default function language_switcher() {
+export default function LanguageSwitcher(props) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const button = (
     <EuiButtonEmpty
@@ -9,7 +9,7 @@ export default function language_switcher() {
       onClick={() => setIsPopoverOpen(!isPopoverOpen)}
       className="euiFormControlLayout__append"
     >
-      {'SQL'}
+      {props.language}
     </EuiButtonEmpty>
   );
   return (
@@ -25,17 +25,20 @@ export default function language_switcher() {
         Syntax options
     </EuiPopoverTitle>
       <div style={{ width: '350px' }}>
-        <EuiForm>
-          <EuiFormRow label={'SQL'}>
-            <EuiSwitch
-              id="queryEnhancementOptIn"
-              name="popswitch"
-              label='SQL'
-              checked={true}
-              onChange={() => { }}
-            />
-          </EuiFormRow>
-        </EuiForm>
+        <EuiSelect
+          options={[
+            {
+              value: 'SQL',
+              text: 'SQL',
+            },
+            {
+              value: 'PPL',
+              text: 'PPL',
+            }
+          ]}
+          value={props.language}
+          onChange={(e) => props.setLanguage(e.target.value)}
+        />
       </div>
     </EuiPopover>
   )

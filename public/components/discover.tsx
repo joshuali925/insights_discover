@@ -3,12 +3,15 @@ import { EuiText, EuiPopover, EuiButton, EuiButtonEmpty, EuiFlexGroup, EuiFlexIt
 import SearchBar from './search_bar/search_bar';
 import TopNavMenu from './top_nav_menu';
 import Visualization from './visualization/visualization';
-import {metadata} from '../data/data'
+import { metadata } from '../data/data'
+import Events from './events/events';
 
 
 export default function Discover() {
   const [selectedFields, setSelectedFields] = useState([...metadata]);
   const [availableFields, setAvailableFields] = useState([]);
+  const [response, setResponse] = useState('');
+  
   const addField = (field) => {  // available -> selected
     let removedField = null;
 
@@ -20,7 +23,7 @@ export default function Discover() {
       }
     }
     setAvailableFields(newFields);
-    
+
     newFields = [...selectedFields];
     newFields.push(removedField);
     newFields.sort((a, b) => a.name.localeCompare(b.name));
@@ -38,7 +41,7 @@ export default function Discover() {
       }
     }
     setSelectedFields(newFields);
-    
+
     newFields = [...availableFields];
     newFields.push(removedField);
     newFields.sort((a, b) => a.name.localeCompare(b.name));
@@ -49,7 +52,9 @@ export default function Discover() {
       id: 'events--id',
       name: 'Events',
       content: (
-        <></>
+        <>
+          <Events selectedFields={selectedFields} availableFields={availableFields} setSelectedFields={setSelectedFields} setAvailableFields={setAvailableFields} addField={addField} removeField={removeField} response={response} />
+        </>
       )
     },
     {
@@ -81,7 +86,7 @@ export default function Discover() {
   return (
     <>
       <TopNavMenu />
-      <SearchBar />
+      <SearchBar response={response} setResponse={setResponse} />
       <EuiTabbedContent
         tabs={tabs}
         initialSelectedTab={tabs[0]}
