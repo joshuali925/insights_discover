@@ -2,16 +2,54 @@ import React, { useState } from 'react'
 import { EuiText, EuiPopover, EuiButton, EuiButtonEmpty, EuiFlexGroup, EuiFlexItem, EuiPanel, EuiTabbedContent } from '@elastic/eui'
 import SearchBar from './search_bar/search_bar';
 import TopNavMenu from './top_nav_menu';
-import Events from './events/events';
+import Visualization from './visualization/visualization';
+import {metadata} from '../data/data'
 
 
 export default function Discover() {
+  const [selectedFields, setSelectedFields] = useState([...metadata]);
+  const [availableFields, setAvailableFields] = useState([]);
+  const addField = (field) => {  // available -> selected
+    let removedField = null;
+
+    let newFields = [...availableFields];
+    for (let i = 0; i < newFields.length; i++) {
+      if (newFields[i].name === field.name) {
+        removedField = newFields.splice(i, 1)[0];
+        break;
+      }
+    }
+    setAvailableFields(newFields);
+    
+    newFields = [...selectedFields];
+    newFields.push(removedField);
+    newFields.sort((a, b) => a.name.localeCompare(b.name));
+    setSelectedFields(newFields);
+  };
+
+  const removeField = (field) => {
+    let removedField = null;
+
+    let newFields = [...selectedFields];
+    for (let i = 0; i < newFields.length; i++) {
+      if (newFields[i].name === field.name) {
+        removedField = newFields.splice(i, 1)[0];
+        break;
+      }
+    }
+    setSelectedFields(newFields);
+    
+    newFields = [...availableFields];
+    newFields.push(removedField);
+    newFields.sort((a, b) => a.name.localeCompare(b.name));
+    setAvailableFields(newFields);
+  };
   const tabs = [
     {
       id: 'events--id',
       name: 'Events',
       content: (
-        <Events />
+        <></>
       )
     },
     {
@@ -35,6 +73,7 @@ export default function Discover() {
       name: 'Visualization',
       content: (
         <>
+          <Visualization selectedFields={selectedFields} availableFields={availableFields} setSelectedFields={setSelectedFields} setAvailableFields={setAvailableFields} addField={addField} removeField={removeField} />
         </>
       )
     }

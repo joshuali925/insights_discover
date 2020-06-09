@@ -1,23 +1,22 @@
 import React, { Fragment, useState } from 'react'
 import { EuiButtonEmpty, EuiBadge, EuiIcon, EuiBadgeGroup, EuiSpacer } from '@elastic/eui'
-import { metadata } from '../../data/data'
 
-export default function Legends() {
+export default function Legends(props) {
   const [showAreaChart, setShowAreaChart] = useState(true);
   const [showLineChart, setShowLineChart] = useState(true);
-
-  const renderBadge = (name, idx = -1, color = '') => {
+  
+  const renderBadge = (field, idx = -1) => {
     return (
       <EuiBadge
         key={`badge-${idx}`}
         color="#f5f5f5"
         iconType="cross"
         iconSide="right"
-        iconOnClick={() => { }}
+        iconOnClick={() => props.removeField(field)}
         iconOnClickAriaLabel=''
       >
-        <EuiIcon type="dot" color={color} />
-        {name}
+        <EuiIcon type="dot" color={field.color} />
+        {field.name}
       </EuiBadge>
     )
   }
@@ -36,7 +35,7 @@ export default function Legends() {
       </div>
       {showAreaChart &&
         <EuiBadgeGroup gutterSize="s">
-          {metadata.map((data, idx) => data.type === 'area' && renderBadge(data.name, idx, data.color))}
+          {props.selectedFields.filter((field) => field.type === 'area').map((field, idx) => renderBadge(field, idx))}
         </EuiBadgeGroup>
       }
       <EuiSpacer />
@@ -52,7 +51,7 @@ export default function Legends() {
       </div>
       {showLineChart &&
         <EuiBadgeGroup gutterSize="s">
-          {metadata.map((data, idx) => data.type === 'line' && renderBadge(data.name, idx, data.color))}
+          {props.selectedFields.filter((field) => field.type === 'line').map((field, idx) => renderBadge(field, idx))}
         </EuiBadgeGroup>
       }
       <EuiSpacer />

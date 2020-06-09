@@ -4,28 +4,7 @@ import DiscoverFieldSearch from './discover_field_search'
 import { EuiForm, EuiFormRow, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiButtonIcon, EuiTitle, EuiToken, EuiToolTip, EuiText, EuiButton } from '@elastic/eui'
 
 export default function SideBar(props) {
-  const addField = (field, idx) => {
-    let newFields = [...props.selectedFields];
-    newFields.push(props.availableFields[idx]);
-    newFields.sort((a, b) => a.name.localeCompare(b.name));
-    props.setSelectedFields(newFields);
-
-    newFields = [...props.availableFields];
-    newFields.splice(idx, 1);
-    props.setAvailableFields(newFields);
-  };
-
-  const removeField = (field, idx) => {
-    let newFields = [...props.availableFields];
-    newFields.push(props.selectedFields[idx]);
-    newFields.sort((a, b) => a.name.localeCompare(b.name));
-    props.setAvailableFields(newFields);
-
-    newFields = [...props.selectedFields];
-    newFields.splice(idx, 1);
-    props.setSelectedFields(newFields);
-  };
-
+  
   const fieldIcon = (icon: string) => {
     return (
       <EuiToken
@@ -73,7 +52,7 @@ export default function SideBar(props) {
                   onClick={(ev: React.MouseEvent<HTMLButtonElement>) => {
                     ev.preventDefault();
                     ev.stopPropagation();
-                    removeField(field, idx);
+                    props.removeField(field);
                   }}
                 >
                   {"Remove"}
@@ -103,7 +82,7 @@ export default function SideBar(props) {
                   onClick={(ev: React.MouseEvent<HTMLButtonElement>) => {
                     ev.preventDefault();
                     ev.stopPropagation();
-                    addField(field, idx);
+                    props.addField(field);
                   }}
                 >
                   {'Add'}

@@ -6,7 +6,7 @@ import { sampleLogData, layout } from '../../data/data';
 import Insights from './insights';
 import Legends from './legends';
 
-export default function Events() {
+export default function Visualization(props) {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const [iconHover, setIconHover] = useState(false);
 
@@ -14,39 +14,15 @@ export default function Events() {
     setIsSideBarOpen(!isSideBarOpen);
   };
 
-  const [selectedFields, setSelectedFields] = useState([
-    {
-      name: '_id',
-      icon: 'tokenElement'
-    },
-    {
-      name: '_index',
-      icon: 'tokenString'
-    },
-  ]);
-  const [availableFields, setAvailableFields] = useState([
-    {
-      name: 'DestWeather',
-      icon: 'tokenString'
-    },
-    {
-      name: 'Dest',
-      icon: 'tokenString'
-    },
-    {
-      name: 'DestAirportID',
-      icon: 'tokenString'
-    },
-  ]);
-
   const iconStyle = iconHover ? { cursor: "pointer" } : { opacity: 0.4 };
   const iconClass = "kuiIcon fa-chevron-circle-" + (isSideBarOpen ? "left" : "right");
+  const data = sampleLogData(props.selectedFields);
 
   return (
     <EuiFlexGroup style={{ padding: 5 }} gutterSize='s'>
       {isSideBarOpen &&
         <EuiFlexItem grow={false}>
-          <SideBar selectedFields={selectedFields} availableFields={availableFields} setSelectedFields={setSelectedFields} setAvailableFields={setAvailableFields} />
+          <SideBar selectedFields={props.selectedFields} availableFields={props.availableFields} setSelectedFields={props.setSelectedFields} setAvailableFields={props.setAvailableFields} addField={props.addField} removeField={props.removeField} />
         </EuiFlexItem>
       }
       <EuiFlexItem grow={false} style={{ width: 5 }}>
@@ -76,10 +52,10 @@ export default function Events() {
           </EuiCode>
           <EuiFlexGroup>
             <EuiFlexItem grow={false}>
-              <Plt data={sampleLogData.data} title={sampleLogData.title} layout={layout} />
+              <Plt data={data.data} title={data.title} layout={layout} />
             </EuiFlexItem>
             <EuiFlexItem grow={false}>
-              <Legends />
+              <Legends selectedFields={props.selectedFields} availableFields={props.availableFields} setSelectedFields={props.setSelectedFields} setAvailableFields={props.setAvailableFields} removeField={props.removeField} />
             </EuiFlexItem>
           </EuiFlexGroup>
           <Insights />
