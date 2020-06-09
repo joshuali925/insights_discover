@@ -26,9 +26,8 @@ export default function SearchBar(props) {
       },
       body: `{"query":"${SQLQuery || DefaultSQLQuery}"}`,
     })
-    // .then(resp => console.log(resp))
       .then(resp => resp.json())
-      // .then(json => JSON.parse(json.resp))
+      .then(json => JSON.parse(json.resp))
       .then(json => props.setResponse(json))
   };
 

@@ -120,6 +120,15 @@ export const sampleLogData = (selectedFields) => {
 
 export const metadata = [
   {
+    name: 'responseTime',
+    icon: 'tokenNumber',
+    type: 'line',
+    color: 'black',
+    uniqueEntries: new Set(responseTime).size,
+    valueRange: `${Math.min(...responseTime).toFixed(1)}ms-${Math.max(...responseTime).toFixed(1)}ms`,
+    average: `${(responseTime.reduce((a, b) => a + b, 0) / responseTime.length).toFixed(1)}ms`
+  },
+  {
     name: 'responseTimeWeb',
     icon: 'tokenNumber',
     type: 'area',
@@ -145,14 +154,5 @@ export const metadata = [
     uniqueEntries: new Set(responseTimeJVM).size,
     valueRange: `${Math.min(...responseTimeJVM).toFixed(1)}ms-${Math.max(...responseTimeJVM).toFixed(1)}ms`,
     average: `${(responseTimeJVM.reduce((a, b) => a + b, 0) / responseTimeJVM.length).toFixed(1)}ms`
-  },
-  {
-    name: 'responseTime',
-    icon: 'tokenNumber',
-    type: 'line',
-    color: 'black',
-    uniqueEntries: new Set(responseTime).size,
-    valueRange: `${Math.min(...responseTime).toFixed(1)}ms-${Math.max(...responseTime).toFixed(1)}ms`,
-    average: `${(responseTime.reduce((a, b) => a + b, 0) / responseTime.length).toFixed(1)}ms`
   },
 ];

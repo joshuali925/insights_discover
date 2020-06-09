@@ -10,7 +10,7 @@ import Events from './events/events';
 export default function Discover() {
   const [selectedFields, setSelectedFields] = useState([...metadata]);
   const [availableFields, setAvailableFields] = useState([]);
-  const [response, setResponse] = useState('');
+  const [response, setResponse] = useState({});
   
   const addField = (field) => {  // available -> selected
     let removedField = null;
