@@ -50,20 +50,20 @@ export default function Table(props) {
 
   const tabs = [
     {
-      id: 'raw-json--id',
-      name: 'Raw JSON',
-      content: (
-        <>
-          <div><pre>{JSON.stringify(props.response, null, 2)}</pre></div>
-        </>
-      )
-    },
-    {
       id: 'table--id',
       name: 'Table',
       content: (
         <>
           {renderTable()}
+        </>
+      )
+    },
+    {
+      id: 'raw-json--id',
+      name: 'Raw JSON',
+      content: (
+        <>
+          <div><pre>{JSON.stringify(props.response, null, 2)}</pre></div>
         </>
       )
     },
