@@ -6,7 +6,7 @@ const responseTimeWeb = Array.from({ length: length }, () => randfloat(10, 25));
 const responseTimeRedis = Array.from({ length: length }, () => randfloat(15, 20));
 const responseTimeJVM = Array.from({ length: length }, () => randfloat(15, 30));
 const responseTime = Array.from({ length: length }, (v, i) => responseTimeJVM[i] + responseTimeRedis[i] + responseTimeWeb[i]);
-const datalist = { responseTimeWeb, responseTimeRedis, responseTimeJVM, responseTime };
+export const datalist = { responseTime, responseTimeWeb, responseTimeRedis, responseTimeJVM };
 
 export const layout = {
   yaxis: { range: [0, Math.max(...responseTime) * 1.3] },
@@ -124,6 +124,7 @@ export const metadata = [
     icon: 'tokenNumber',
     type: 'line',
     color: 'black',
+    length: length,
     uniqueEntries: new Set(responseTime).size,
     valueRange: `${Math.min(...responseTime).toFixed(1)}ms-${Math.max(...responseTime).toFixed(1)}ms`,
     average: `${(responseTime.reduce((a, b) => a + b, 0) / responseTime.length).toFixed(1)}ms`
@@ -133,6 +134,7 @@ export const metadata = [
     icon: 'tokenNumber',
     type: 'area',
     color: 'rgb(211, 95, 133)',
+    length: length,
     uniqueEntries: new Set(responseTimeWeb).size,
     valueRange: `${Math.min(...responseTimeWeb).toFixed(1)}ms-${Math.max(...responseTimeWeb).toFixed(1)}ms`,
     average: `${(responseTimeWeb.reduce((a, b) => a + b, 0) / responseTimeWeb.length).toFixed(1)}ms`
@@ -142,6 +144,7 @@ export const metadata = [
     icon: 'tokenNumber',
     type: 'area',
     color: 'rgb(85, 178, 153)',
+    length: length,
     uniqueEntries: new Set(responseTimeRedis).size,
     valueRange: `${Math.min(...responseTimeRedis).toFixed(1)}ms-${Math.max(...responseTimeRedis).toFixed(1)}ms`,
     average: `${(responseTimeRedis.reduce((a, b) => a + b, 0) / responseTimeRedis.length).toFixed(1)}ms`
@@ -151,6 +154,7 @@ export const metadata = [
     icon: 'tokenNumber',
     type: 'area',
     color: 'rgb(93, 141, 188)',
+    length: length,
     uniqueEntries: new Set(responseTimeJVM).size,
     valueRange: `${Math.min(...responseTimeJVM).toFixed(1)}ms-${Math.max(...responseTimeJVM).toFixed(1)}ms`,
     average: `${(responseTimeJVM.reduce((a, b) => a + b, 0) / responseTimeJVM.length).toFixed(1)}ms`

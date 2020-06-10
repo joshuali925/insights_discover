@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { EuiTabbedContent } from '@elastic/eui'
 import InsightsRow from './insights_row'
+import DataRow from './data_row';
 
 export default function Insights() {
   const tabs = [
@@ -18,6 +19,7 @@ export default function Insights() {
       name: 'Sample data',
       content: (
         <Fragment>
+          <DataRow />
         </Fragment>
       )
     },
