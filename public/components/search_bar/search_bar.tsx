@@ -13,10 +13,10 @@ export default function SearchBar(props) {
     )
   };
 
-  const fetchSQLResults = (
-    SQLQuery: string,
-    DefaultSQLQuery: string = 'select * from kibana_sample_data_flights',
-    api: string = '../api/sql_console/query'
+  const fetchResults = (
+    Query: string,
+    DefaultQuery: string,
+    api: string
   ) => {
     return fetch(api, {
       method: 'POST',
@@ -24,11 +24,20 @@ export default function SearchBar(props) {
         'content-type': 'application/json;charset=UTF-8',
         'kbn-version': '7.7.0',
       },
-      body: `{"query":"${SQLQuery || DefaultSQLQuery}"}`,
+      body: `{"query":"${Query || DefaultQuery}"}`,
     })
       .then(resp => resp.json())
+  };
+  
+  const fetchSoon = () => {
+    if (language === 'SQL') {
+      fetchResults(query, 'select * from kibana_sample_data_flights', '../api/sql_console/query')
       .then(json => JSON.parse(json.resp))
       .then(json => props.setResponse(json))
+    } else if (language === 'PPL') {
+      fetchResults(query, 'source=.kibana', 'http://localhost:9200/_opendistro/_ppl')
+      .then(json => props.setResponse(json))
+    }
   };
 
   return (
@@ -47,7 +56,7 @@ export default function SearchBar(props) {
             onKeyPress={(e) => {
               let code = e.keyCode || e.which;
               if (code === 13) {  // enter pressed
-                fetchSQLResults(query)
+                fetchSoon();
               }
             }}
             type="text"

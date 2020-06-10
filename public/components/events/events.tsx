@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { EuiFlexGroup, EuiFlexItem, EuiPanel, EuiTitle, EuiButton, EuiHorizontalRule, EuiText } from '@elastic/eui';
 import SideBar from '../side_bar/side_bar';
+import Table from './table';
 
 export default function Events(props) {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
@@ -28,7 +29,7 @@ export default function Events(props) {
           <EuiFlexGroup gutterSize='s'>
             <EuiFlexItem>
               <EuiTitle size='s'>
-                <h2>Visualization</h2>
+                <h2>Events</h2>
               </EuiTitle>
             </EuiFlexItem>
             <EuiFlexItem grow={false}>
@@ -43,12 +44,10 @@ export default function Events(props) {
           </EuiFlexGroup>
           <EuiHorizontalRule margin='s' />
           {Object.keys(props.response).length > 0 ? (
-          <div>
-          <pre>
-            {JSON.stringify(props.response, null, 2)}
-          </pre>
-        </div>
-          ) : (<EuiText>Type a query in the search bar then press enter.</EuiText>)}
+            <Table response={props.response} />
+          ) : (
+              <EuiText>Type a query in the search bar then press enter.</EuiText>
+            )}
         </EuiPanel>
       </EuiFlexItem>
     </EuiFlexGroup>
