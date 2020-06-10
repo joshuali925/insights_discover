@@ -20,9 +20,12 @@ export default function Table(props) {
   ];
 
   const items = [];
-  
-  props.response.datarows.forEach((row, idx) => {
+
+  props.response.datarows.slice(0, 100).forEach((row, idx) => {
     const stringbuilder = [];
+
+    if (row.row)  // fix PPL bug TODO remove after upgraded PPL
+      row = row.row;
     row.forEach((field, i) => {
       const data = typeof field === 'string' ? field : JSON.stringify(field);
       stringbuilder.push(`${props.response.schema[i].name}:`, data);
