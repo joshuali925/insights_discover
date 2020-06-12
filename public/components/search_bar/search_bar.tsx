@@ -1,7 +1,8 @@
-import React, { useState, Fragment } from 'react'
-import { EuiFlexItem, EuiSuperDatePicker, EuiFlexGroup, EuiSearchBar, EuiFieldText, EuiButtonEmpty, EuiPopover, EuiPopoverTitle, EuiText, EuiLink, EuiSpacer, EuiForm, EuiFormRow, EuiSwitch, EuiIcon, EuiListGroup, EuiPopoverFooter, EuiButton } from '@elastic/eui'
-import renderSavedQueries from './saved_query_management_component';
+import { EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiSuperDatePicker } from '@elastic/eui';
+import React, { useState } from 'react';
+import { fetchSoon } from './fetch_results';
 import LanguageSwitcher from './language_switcher';
+import renderSavedQueries from './saved_query_management_component';
 
 export default function SearchBar(props) {
   const [query, setQuery] = useState('');
@@ -11,33 +12,6 @@ export default function SearchBar(props) {
     return (
       <LanguageSwitcher language={language} setLanguage={setLanguage} />
     )
-  };
-
-  const fetchResults = (
-    Query: string,
-    DefaultQuery: string,
-    api: string
-  ) => {
-    return fetch(api, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json;charset=UTF-8',
-        'kbn-version': '7.7.0',
-      },
-      body: `{"query":"${Query || DefaultQuery}"}`,
-    })
-      .then(resp => resp.json())
-  };
-  
-  const fetchSoon = () => {
-    if (language === 'SQL') {
-      fetchResults(query, 'select * from kibana_sample_data_flights', '../api/sql_console/query')
-      .then(json => JSON.parse(json.resp))
-      .then(json => props.setResponse(json))
-    } else if (language === 'PPL') {
-      fetchResults(query, 'source=.kibana', 'http://localhost:9200/_opendistro/_ppl')
-      .then(json => props.setResponse(json))
-    }
   };
 
   return (
@@ -56,7 +30,7 @@ export default function SearchBar(props) {
             onKeyPress={(e) => {
               let code = e.keyCode || e.which;
               if (code === 13) {  // enter pressed
-                fetchSoon();
+                fetchSoon(query, language, props.setResponse);
               }
             }}
             type="text"

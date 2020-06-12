@@ -20,27 +20,15 @@
 import React, { useState } from 'react';
 import { i18n } from '@kbn/i18n';
 import { FormattedMessage, I18nProvider } from '@kbn/i18n/react';
-import { BrowserRouter as Router } from 'react-router-dom';
-
-import {
-  EuiButton,
-  EuiHorizontalRule,
-  EuiPage,
-  EuiPageBody,
-  EuiPageContent,
-  EuiPageContentBody,
-  EuiPageContentHeader,
-  EuiPageHeader,
-  EuiTitle,
-  EuiText,
-} from '@elastic/eui';
+import { BrowserRouter, Router, HashRouter, Switch, Route } from 'react-router-dom';
 
 import { CoreStart } from '../../../../src/core/public';
 import { NavigationPublicPluginStart } from '../../../../src/plugins/navigation/public';
 
 import { PLUGIN_ID, PLUGIN_NAME } from '../../common';
 
-import Discover from '../components/discover';
+import Discover from './discover';
+import APM from './apm/apm';
 
 interface InsightsDiscoverAppDeps {
   basename: string;
@@ -60,13 +48,19 @@ export const InsightsDiscoverApp = ({
   // Render the application DOM.
   // Note that `navigation.ui.TopNavMenu` is a stateful component exported on the `navigation` plugin's start contract.
   return (
-    <Router basename={basename}>
-      <I18nProvider>
-        {/* <navigation.ui.TopNavMenu appName={PLUGIN_ID} showSearchBar={true} /> */}
-        <div style={{ margin: 5 }}>
-          <Discover />
+    <HashRouter basename={basename}>
+      <Switch>
+        <Route exact path={'/'}>
+          <div style={{ margin: 5 }}>
+            <Discover />
+          </div>
+        </Route>
+        <Route exact path={'/apm'}>
+          <div style={{ margin: 5 }}>
+            <APM />
         </div>
-      </I18nProvider>
-    </Router>
+        </Route>
+      </Switch>
+    </HashRouter>
   );
 };

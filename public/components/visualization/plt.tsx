@@ -7,8 +7,8 @@ export default function Plt(props) {
     <Fragment>
       <Plot
         data={props.data}
-        // style={{ width: "100%", height: "100%" }}
-        // useResizeHandler={true}
+        style={{ width: "100%", height: "100%" }}
+        useResizeHandler={true}
         // config={{ displayModeBar: false }}
         layout={{
           // plot_bgcolor: "rgb(20,22,25)",  // 30, 31, 36
@@ -24,10 +24,10 @@ export default function Plt(props) {
           //   },
           // },
           margin: {
-            l: 40,
-            r: 30,
+            l: 30,
+            r: 5,
             b: 30,
-            t: 40,  // 10
+            t: 5,  // 10
             pad: 4
           },
           height: props.height,
@@ -37,6 +37,7 @@ export default function Plt(props) {
             orientation: 'h',
             traceorder: 'normal',
           },
+          showlegend: true,
           // dragmode: 'lasso', // (enumerated: "zoom" | "pan" | "select" | "lasso" | "orbit" | "turntable" )
           hovermode: 'closest',
           xaxis: {
