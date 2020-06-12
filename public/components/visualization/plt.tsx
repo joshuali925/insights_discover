@@ -44,7 +44,7 @@ export default function Plt(props) {
             showgrid: true,
             // fixedrange: true,
             zeroline: false,
-            type: 'auto',
+            // type: 'auto',
             // gridcolor: 'rgb(60,61,64)',
             rangemode: 'normal', // (enumerated: "normal" | "tozero" | "nonnegative" )
           },
@@ -52,7 +52,7 @@ export default function Plt(props) {
             showgrid: true,
             // fixedrange: true,
             zeroline: false,
-            type: 'linear',
+            // type: 'linear',
             // gridcolor: 'rgb(60,61,64)',
             rangemode: 'normal', // (enumerated: "normal" | "tozero" | "nonnegative" ),
           },
@@ -60,7 +60,7 @@ export default function Plt(props) {
             showgrid: true,
             // fixedrange: true,
             zeroline: false,
-            type: 'linear',
+            // type: 'linear',
             // gridcolor: 'rgb(60,61,64)',
             rangemode: 'normal', // (enumerated: "normal" | "tozero" | "nonnegative" )
           },

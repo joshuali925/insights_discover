@@ -26,6 +26,7 @@
     "@elastic/eui": "^24.0.0",
     "moment": "^2.26.0",
     "plotly.js": "^1.54.1",
+    "react-graph-vis": "^1.0.5",
     "react-plotly.js": "^2.4.0"
   }
 }

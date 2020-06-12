@@ -1,18 +1,26 @@
 import React, { useState } from 'react'
-import { EuiFlexItem, EuiPanel, EuiTitle, EuiText, EuiFlexGroup, EuiSpacer, EuiFlexGrid } from '@elastic/eui';
+import { EuiFlexItem, EuiPanel, EuiTitle, EuiText, EuiFlexGroup, EuiSpacer, EuiFlexGrid, EuiIcon } from '@elastic/eui';
 import { getStats } from './get_stats';
 import Plt from '../visualization/plt';
 import { apm_data } from '../../data/apm_data';
+import FlowChart from '../visualization/flowchart';
 
 export default function APMDashboards() {
 
-  const renderDashboard = (data, idx) => {
+  const renderDashboard = (data, idx, flexGrow: any = true, plot = null) => {
     return (
-      <EuiFlexItem key={`apm-dashboard-${idx}`}>
-        <EuiPanel grow={false} paddingSize='s'>
-          <EuiText style={{ fontWeight: 470, fontSize: 14, marginLeft: 5 }}>
-            {data.name}
-          </EuiText>
+      <EuiFlexItem key={`apm-dashboard-${idx}`} grow={flexGrow}>
+        <EuiPanel grow={true} paddingSize='s'>
+          <EuiFlexGroup gutterSize='none'>
+            <EuiFlexItem>
+              <EuiText style={{ fontWeight: 470, fontSize: 14, marginLeft: 5 }}>
+                {data.name}
+              </EuiText>
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+              <EuiIcon type="boxesHorizontal" onClick={() => { }} />
+            </EuiFlexItem>
+          </EuiFlexGroup>
           {typeof data.data === 'string' ? (
             <>
               <EuiSpacer size='s' />
@@ -22,7 +30,7 @@ export default function APMDashboards() {
             </>
           ) : (
               <>
-                <Plt data={data.data} layout={data.layout} />
+                {plot || <Plt data={data.data} layout={data.layout} />}
               </>
             )}
         </EuiPanel>
@@ -34,10 +42,17 @@ export default function APMDashboards() {
   return (
     <>
       <EuiFlexGrid columns={4} style={{ margin: 10 }}>
-        {apm_data.map((data, idx) => (
+        {apm_data.slice(0, 8).map((data, idx) => (
           renderDashboard(data, idx)
         ))}
       </EuiFlexGrid>
+      <EuiFlexGroup style={{ margin: 10 }}>
+        {renderDashboard(apm_data[8], 8, 4)}
+        {renderDashboard({ name: 'Latency across services' }, 9, 6, <FlowChart />)}
+      </EuiFlexGroup>
+      <EuiFlexGroup style={{ margin: 10 }}>
+        {renderDashboard(apm_data[9], 9)}
+      </EuiFlexGroup>
     </>
   )
 }
