@@ -1,6 +1,6 @@
 {
   "id": "insightsDiscover",
-  "version": "8.0.0",
+  "version": "7.7.0",
   "server": true,
   "ui": true,
   "requiredPlugins": ["navigation"],

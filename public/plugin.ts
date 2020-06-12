@@ -14,7 +14,7 @@ export class InsightsDiscoverPlugin
     core.application.register({
       id: 'insightsDiscover',
       title: PLUGIN_NAME,
-      icon: `plugins/${PLUGIN_ID}/assets/icon.svg`,
+      /* icon: `plugins/${PLUGIN_ID}/assets/icon.svg`, */
       async mount(params: AppMountParameters) {
         // Load application bundle
         const { renderApp } = await import('./application');
@@ -39,6 +39,17 @@ export class InsightsDiscoverPlugin
   }
 
   public start(core: CoreStart): InsightsDiscoverPluginStart {
+    const basePath = `${core.http.basePath.get()}/app/${PLUGIN_ID}#`;
+    core.chrome.setBreadcrumbs([
+      {
+        text: 'Insights',
+        href: basePath,
+      },
+      {
+        text: 'APM',
+        href: `${basePath}/apm`,
+      },
+    ])
     return {};
   }
 

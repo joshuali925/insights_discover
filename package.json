@@ -5,7 +5,7 @@
   "author": "Joshua Li <lijshu@amazon.com>",
   "license": "Apache-2.0",
   "kibana": {
-    "version": "8.0.0"
+    "version": "7.7.0"
   },
   "scripts": {
     "preinstall": "node ../../preinstall_check",
@@ -22,7 +22,7 @@
     "yarn": "^1.21.1"
   },
   "dependencies": {
-    "@elastic/datemath": "^5.0.3",
+    "@elastic/datemath": "link:../../packages/elastic-datemath",
     "@elastic/eui": "^24.0.0",
     "moment": "^2.26.0",
     "plotly.js": "^1.54.1",
