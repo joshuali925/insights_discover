@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { EuiFlexItem, EuiPanel, EuiTitle, EuiText, EuiFlexGroup, EuiSpacer, EuiFlexGrid, EuiIcon } from '@elastic/eui';
-import { getStats } from './get_stats';
 import Plt from '../visualization/plt';
 import { apm_data } from '../../data/apm_data';
 import FlowChart from '../visualization/flowchart';

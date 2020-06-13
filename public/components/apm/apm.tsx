@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import SearchBar from '../search_bar/search_bar';
-import { EuiTitle, EuiFlexGroup, EuiFlexItem, EuiButton, EuiFlexGrid, EuiText, EuiPanel } from '@elastic/eui';
+import { EuiTitle, EuiFlexGroup, EuiFlexItem, EuiButton, EuiFlexGrid, EuiText, EuiPanel, EuiFlyout, EuiFlyoutHeader, EuiFlyoutBody } from '@elastic/eui';
 import APMDashboards from './apm_dashboards';
+import Collab from './collab';
 
 export default function APM() {
   const [response, setResponse] = useState({});
+  const [flyoutOpen, setFlyoutOpen] = useState(false);
 
   return (
     <>
@@ -13,7 +15,7 @@ export default function APM() {
           <EuiTitle><h1>APM-all-apps</h1></EuiTitle>
         </EuiFlexItem>
         <EuiFlexItem grow={false}>
-          <EuiButton>Collab</EuiButton>
+          <EuiButton onClick={() => setFlyoutOpen(true)}>Collab</EuiButton>
         </EuiFlexItem>
         <EuiFlexItem grow={false}>
           <EuiButton iconSide='right' iconType='arrowDown'>Dashboard Actions</EuiButton>
@@ -24,6 +26,7 @@ export default function APM() {
       </EuiFlexGroup>
       <SearchBar response={response} setResponse={setResponse} />
       <APMDashboards />
+      <Collab flyoutOpen={flyoutOpen} setFlyoutOpen={setFlyoutOpen} />
     </>
   )
 }
