@@ -1,4 +1,4 @@
-import { EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiSuperDatePicker } from '@elastic/eui';
+import { EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiSuperDatePicker, EuiText, EuiButtonEmpty } from '@elastic/eui';
 import React, { useState } from 'react';
 import { fetchSoon } from './fetch_results';
 import LanguageSwitcher from './language_switcher';
@@ -47,6 +47,12 @@ export default function SearchBar(props) {
           />
         </EuiFlexItem>
       </EuiFlexGroup>
+      {props.noFilter || (
+        <EuiButtonEmpty style={{ marginTop: 10 }} size='xs' onClick={() => {}}>
+          + Add filter
+        </EuiButtonEmpty>
+      )}
     </div>
   )
 }
+

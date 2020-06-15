@@ -385,7 +385,8 @@ export const apm_data = [
         t: 30,  // 10
       },
       xaxis: {
-        autorange: true
+        autorange: true,
+        ticksuffix: " ms"
       },
     }
   },

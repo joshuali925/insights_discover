@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import SearchBar from '../search_bar/search_bar';
-import { EuiTitle, EuiFlexGroup, EuiFlexItem, EuiButton, EuiFlexGrid, EuiText, EuiPanel, EuiFlyout, EuiFlyoutHeader, EuiFlyoutBody } from '@elastic/eui';
+import { EuiTitle, EuiFlexGroup, EuiFlexItem, EuiButton, EuiFlexGrid, EuiText, EuiPanel, EuiFlyout, EuiFlyoutHeader, EuiFlyoutBody, EuiSpacer } from '@elastic/eui';
 import APMDashboards from './apm_dashboards';
 import Collab from './collab';
 
@@ -13,6 +13,8 @@ export default function APM() {
       <EuiFlexGroup gutterSize='s' style={{ margin: 10 }}>
         <EuiFlexItem>
           <EuiTitle><h1>APM-all-apps</h1></EuiTitle>
+          <EuiSpacer size='s'/>
+          <EuiText>Dashboard query: service name=* <a style={{color: 'rgb(53, 128, 190)'}}>Edit</a></EuiText>
         </EuiFlexItem>
         <EuiFlexItem grow={false}>
           <EuiButton onClick={() => setFlyoutOpen(true)}>Collab</EuiButton>
